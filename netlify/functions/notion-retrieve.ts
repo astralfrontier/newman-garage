@@ -1,6 +1,26 @@
 import { Handler } from "@netlify/functions";
 import { Client } from "@notionhq/client";
-import { addIndex, assoc, filter, join, map, pluck, propEq } from "ramda";
+import {
+  BlockObjectResponse,
+  ChildDatabaseBlockObjectResponse,
+  DatabaseObjectResponse,
+  PageObjectResponse,
+  PartialBlockObjectResponse,
+  PartialDatabaseObjectResponse,
+  PartialPageObjectResponse,
+} from "@notionhq/client/build/src/api-endpoints";
+import {
+  concat,
+  difference,
+  filter,
+  join,
+  keys,
+  map,
+  pathOr,
+  pluck,
+  propOr,
+  reduce,
+} from "ramda";
 
 interface RetrieveHandlerRequest {
   id: string;
@@ -97,10 +117,10 @@ export interface Relationship {
  * then a data property named the same as the value of "type",
  * so just return that.
  */
-function prop(data: any, name: string): any {
+function prop(data: PageObjectResponse, name: string): any {
   const propData = data.properties[name];
   if (propData) {
-    return propData[propData.type];
+    return propOr(null, propData.type, propData);
   }
   // TODO: else throw error
 }
@@ -125,7 +145,7 @@ function richtext(data: any[]): RichText {
 }
 
 function plaintext(data: any): string {
-  return stripSmartQuotes(join("", pluck("plain_text")(data)));
+  return stripSmartQuotes(join("", pluck("plain_text", data)));
 }
 
 /**
@@ -143,7 +163,7 @@ function tag(data: any): string {
  * @returns
  */
 function tags(data: any): string[] {
-  return pluck("name")(data);
+  return pluck("name", data);
 }
 
 function id<T>(data: any): ReferenceId<T> {
@@ -151,10 +171,10 @@ function id<T>(data: any): ReferenceId<T> {
 }
 
 function ids<T>(data: any): ReferenceId<T>[] {
-  return pluck("id")(data);
+  return pluck("id", data);
 }
 
-function parsePalette(data: any): Palette[] {
+function parsePalette(data: PageObjectResponse[]): Palette[] {
   return map(
     (row) => ({
       id: row.id,
@@ -169,7 +189,7 @@ function parsePalette(data: any): Palette[] {
   );
 }
 
-function parseSetup(data: any): Setup[] {
+function parseSetup(data: PageObjectResponse[]): Setup[] {
   return map(
     (row) => ({
       id: row.id,
@@ -196,7 +216,7 @@ function parseSetup(data: any): Setup[] {
   );
 }
 
-function parseCards(data: any): Card[] {
+function parseCards(data: PageObjectResponse[]): Card[] {
   return map(
     (row) => ({
       id: row.id,
@@ -215,7 +235,7 @@ function parseCards(data: any): Card[] {
   );
 }
 
-function parseRelationships(data: any): Relationship[] {
+function parseRelationships(data: PageObjectResponse[]): Relationship[] {
   return map(
     (row) => ({
       id: row.id,
@@ -231,13 +251,13 @@ function parseRelationships(data: any): Relationship[] {
  * Retrieves all the blocks on a page or database and returns them
  * @param block_id the GUID of the block to retrieve
  */
-async function fetchBlock(notion: Client, block_id: string): Promise<any> {
+async function fetchBlock(notion: Client, block_id: string) {
   let has_more: boolean = true;
   let start_cursor: string | undefined = undefined;
-  let data: any = [];
+  let data: (PartialBlockObjectResponse | BlockObjectResponse)[] = [];
 
   while (has_more) {
-    const response: any = await notion.blocks.children.list({
+    const response = await notion.blocks.children.list({
       block_id,
       start_cursor,
       page_size: 50,
@@ -250,21 +270,18 @@ async function fetchBlock(notion: Client, block_id: string): Promise<any> {
   return data;
 }
 
-async function fetchDatabase(
-  notion: Client,
-  database_id: string
-): Promise<any> {
+async function fetchDatabase(notion: Client, database_id: string) {
   let has_more: boolean = true;
   let start_cursor: string | undefined = undefined;
-  let data: any = [];
+  let data: PageObjectResponse[] = [];
 
   while (has_more) {
-    const response: any = await notion.databases.query({
+    const response = await notion.databases.query({
       database_id,
       start_cursor,
       page_size: 50,
     });
-    data = data.concat(response.results);
+    data = data.concat(response.results as PageObjectResponse[]);
     start_cursor = response.next_cursor || undefined;
     has_more = response.has_more;
   }
@@ -281,48 +298,48 @@ const notionRetrieveHandler: Handler = async (event, _context) => {
 
   try {
     const childBlocks = await fetchBlock(notion, body.id);
-    const childDatabases = map(
-      (block: any) => ({
-        id: block.id,
-        title: block.child_database.title,
-      }),
-      filter(propEq("type", "child_database"), childBlocks)
+    const databaseBlocks = filter(
+      (block) => propOr("unknown", "type", block) === "child_database",
+      childBlocks as ChildDatabaseBlockObjectResponse[]
+    );
+    const databaseNames = map(
+      (database) => pathOr("NO_NAME", ["child_database", "title"], database),
+      databaseBlocks
     );
 
-    const childData = await Promise.all(
-      map(
-        (id: string) => fetchDatabase(notion, id),
-        pluck("id", childDatabases)
-      )
-    );
-    const finalData: Record<string, any>[] = addIndex(map)(
-      (child, idx, _all) => assoc("data", childData[idx], child),
-      childDatabases
+    const databaseContents = await Promise.all(
+      map((database) => fetchDatabase(notion, database.id), databaseBlocks)
     );
 
-    let palettes, setup, cards, relationships;
-
-    for (let database of finalData) {
-      switch (database.title) {
-        case "Palettes":
-          palettes = parsePalette(database.data);
-          break;
-        case "Setup":
-          setup = parseSetup(database.data);
-          break;
-        case "Cards":
-          cards = parseCards(database.data);
-          break;
-        case "Relationships":
-          relationships = parseRelationships(database.data);
-          break;
-      }
+    const databasesByName: { [key: string]: PageObjectResponse[] } = {};
+    for (let i = 0; i < databaseNames.length; i++) {
+      databasesByName[databaseNames[i]] = databaseContents[i];
     }
+
+    const missingKeys = difference(keys(databasesByName), [
+      "Palettes",
+      "Setup",
+      "Cards",
+      "Relationships",
+    ]);
+    if (missingKeys.length) {
+      const errorMessage = `Missing databases: ${missingKeys.join(", ")}`;
+      console.log(errorMessage);
+      return {
+        statusCode: 500,
+        body: errorMessage,
+      };
+    }
+
+    const palettes = parsePalette(databasesByName["Palettes"]);
+    const setup = parseSetup(databasesByName["Setup"]);
+    const cards = parseCards(databasesByName["Cards"]);
+    const relationships = parseRelationships(databasesByName["Relationships"]);
 
     if (!palettes || !setup || !cards || !relationships) {
       return {
         statusCode: 500,
-        body: "Missing one or more databases: Palettes, Setup, Cards, Relationships",
+        body: JSON.stringify({ palettes, setup, cards, relationships }),
       };
     } else {
       return {
@@ -331,6 +348,7 @@ const notionRetrieveHandler: Handler = async (event, _context) => {
       };
     }
   } catch (e: any) {
+    console.error(e);
     return {
       statusCode: 500,
       body: JSON.stringify(e),

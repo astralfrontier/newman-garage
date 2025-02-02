@@ -216,7 +216,7 @@ function villainCard(
 
 ##villain-setup
 [[name]] ${card.name}
-[[art]] images\\${identifier(card.name)}${AorB}.png
+[[art]] images\\${identifier(card.name)}Back.png
 [[artscale]] ${palette?.scaling || "stretched"}
 [[footer]] ${richtextOneline(palette?.art_credit) || "No art credit"}
 [[boxcolor]] ${palette?.box_color || "ffffff"}

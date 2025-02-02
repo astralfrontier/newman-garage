@@ -16,7 +16,7 @@ describe("Unmute data", () => {
     };
 
     const cardNamed = (cards: any, name: string): any => {
-      return find(propEq("title", name), cards);
+      return find(propEq(name, "title"), cards);
     };
 
     beforeEach(() => {

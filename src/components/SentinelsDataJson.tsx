@@ -62,7 +62,7 @@ function richtext(input: RichText): string[] {
 
 function deckOpeningLines(deckData: DeckData, speaker: Setup) {
   const [defaultQuote, everythingElse] = partition(
-    propEq("name", "default"),
+    propEq("default", "name"),
     deckData.relationships
   );
 
