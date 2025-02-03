@@ -266,7 +266,9 @@ ${cardsToOutput(deckData, defaultPalette)}
 }
 
 function deckDataToCardBuilder(deckData: DeckData): string {
-  const paletteId = head(reject(isNil, pluck("palette", deckData.setup)));
+  const paletteId = head(reject(isNil, pluck("palette", deckData.setup))) as
+    | string
+    | undefined;
   const defaultPalette = idToPalette(deckData, paletteId);
 
   // Will contain one of "Hero", "Villain", or "Environment"

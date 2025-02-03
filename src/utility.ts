@@ -1,5 +1,5 @@
 import pascalcase from "pascalcase";
-import { find, head, isNil, map, pluck, propEq, reject } from "ramda";
+import { filter, find, head, isNil, map, pluck, propEq, reject } from "ramda";
 
 import {
   DeckData,
@@ -44,13 +44,12 @@ export function idToNemesis(
   deckData: DeckData,
   ids: ReferenceId<Relationship>[],
   keyName: string = "nemesisIdentifiers"
-): any {
-  const nemesisNames = pluck("name")(
-    reject(
-      isNil,
-      map((id) => find(propEq(id, "id"), deckData.relationships), ids)
-    )
+): { [key: string]: string[] } {
+  const matchingNemeses = filter(
+    (nemesis) => ids.includes(nemesis.id),
+    deckData.relationships
   );
+  const nemesisNames = pluck("name", matchingNemeses);
   const nemesisIdentifiers = map(
     (name) => name.replace(/Character$/, ""),
     nemesisNames
