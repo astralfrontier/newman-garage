@@ -92,6 +92,13 @@ function AppNavbar() {
               >
                 Unmute
               </NavLink>
+              <NavLink
+                className={"navbar-item"}
+                to={"/test/unmute-multi/home"}
+                onClick={() => setIsActive(false)}
+              >
+                Unmute (Multi)
+              </NavLink>
             </div>
           </div>
         </div>

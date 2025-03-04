@@ -1,0 +1,675 @@
+{
+  "palettes": [
+    {
+      "id": "1acddde6-464d-81cf-be12-dbdb29a83d58",
+      "name": "Unmute Colors",
+      "scaling": "centered",
+      "top_color": "ffffff",
+      "box_color": "8ed5e1",
+      "bottom_color": "8ed5e1",
+      "art_credit": [
+        {
+          "text": "Art by Mike Williams",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    }
+  ],
+  "setup": [
+    {
+      "id": "1acddde6-464d-80d9-8225-dd47d7b38508",
+      "name": "Becky",
+      "palette": "1acddde6-464d-81cf-be12-dbdb29a83d58",
+      "expansion": "",
+      "rating": null,
+      "hp": 30,
+      "tags": ["Villain", "B", "201"],
+      "icons": [],
+      "hero_power_name": "",
+      "hero_power": [],
+      "hero_incap_icons": [],
+      "hero_incap": [],
+      "villain_title": "Flipped Sample",
+      "villain_setup": [],
+      "villain_effects": [
+        {
+          "text": "Sample effects!",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "advanced": [],
+      "challenge_name": [],
+      "challenge": [],
+      "nemesis": []
+    },
+    {
+      "id": "1acddde6-464d-80cb-a6ad-caedfa166817",
+      "name": "Becky",
+      "palette": "1acddde6-464d-81cf-be12-dbdb29a83d58",
+      "expansion": "",
+      "rating": null,
+      "hp": 30,
+      "tags": ["Villain", "A", "201"],
+      "icons": [],
+      "hero_power_name": "",
+      "hero_power": [],
+      "hero_incap_icons": [],
+      "hero_incap": [],
+      "villain_title": "Sample",
+      "villain_setup": [],
+      "villain_effects": [
+        {
+          "text": "Sample",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "advanced": [],
+      "challenge_name": [],
+      "challenge": [],
+      "nemesis": []
+    },
+    {
+      "id": "1acddde6-464d-813e-967d-f173d99a4086",
+      "name": "Unmute",
+      "palette": "1acddde6-464d-81cf-be12-dbdb29a83d58",
+      "expansion": "Menagerie",
+      "rating": 2,
+      "hp": 50,
+      "tags": ["Villain", "A"],
+      "icons": [],
+      "hero_power_name": "Leave this blank",
+      "hero_power": [
+        {
+          "text": "Leave this blank",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "hero_incap_icons": [],
+      "hero_incap": [
+        {
+          "text": "Leave this blank",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "villain_title": "Anti-Supers Iconoclast",
+      "villain_setup": [
+        {
+          "text": "At the start of the game, {Unmute} enters play 'Anti-Supers Iconoclast' side up.\nReveal cards from the villain deck until Video Drone Swarm and one nemesis are revealed and put both into play. Shuffle the other revealed cards back into the villain deck.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "villain_effects": [
+        {
+          "text": "{Unmute} is indestructible.\nAt the start of the villain turn, if {Unmute} has 0 or fewer HP, destroy each other villain card then flip her. For each card destroyed this way, {Unmute} deals the hero target with the highest HP {H} lightning damage.\nAt the end of the villain turn, {Unmute} deals the {H - 2} hero targets with the highest HP 3 melee damage each.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "advanced": [
+        {
+          "text": "At the start of the game, put both Nemesis cards into play.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "challenge_name": [
+        {
+          "text": "Out of Time",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "challenge": [
+        {
+          "text": "Before {Unmute} flips to her second side, search her deck and trash for all Amp cards other than Echo Chamber and put them under her character card.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "nemesis": ["1acddde6-464d-8176-a91c-ce62aeca75e3"]
+    },
+    {
+      "id": "1acddde6-464d-817b-8afa-f865a6a53dfb",
+      "name": "Unmute",
+      "palette": "1acddde6-464d-81cf-be12-dbdb29a83d58",
+      "expansion": "Menagerie",
+      "rating": null,
+      "hp": 30,
+      "tags": ["Villain", "B"],
+      "icons": [],
+      "hero_power_name": "",
+      "hero_power": [
+        {
+          "text": "Leave this blank",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "hero_incap_icons": [],
+      "hero_incap": [
+        {
+          "text": "Leave this blank",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "villain_title": "Amplifier Overdrive",
+      "villain_setup": [],
+      "villain_effects": [
+        {
+          "text": "When flipped to this side, restore {Unmute} to 30 HP then remove all non-Amp cards from the villain trash and deck from the game. Shuffle the villain trash into its deck.\nWhenever a villain card would be put into the trash, instead put it under this card.\nIncrease damage dealt by {Unmute} by 1 for each card under this card.\nAt the start of the villain turn, play the top card of the villain deck. Then, if there are no cards in the villain deck, {Unmute}'s cybernetics have overcharged and destroyed the area. ",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        },
+        {
+          "text": "Game over",
+          "bold": true,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        },
+        {
+          "text": ".",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "advanced": [
+        {
+          "text": "When flipped to this side, search the villain deck and trash for both copies of Vicious Call Out and Shattering Cry and remove them from the game.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "challenge_name": [],
+      "challenge": [],
+      "nemesis": ["1acddde6-464d-8176-a91c-ce62aeca75e3"]
+    }
+  ],
+  "cards": [
+    {
+      "id": "1acddde6-464d-817f-b200-d337bba9ce0d",
+      "name": "Fractal",
+      "palette": "1acddde6-464d-81cf-be12-dbdb29a83d58",
+      "quantity": 1,
+      "keywords": ["Nemesis"],
+      "icons": [
+        "ReduceDamageTaken",
+        "EndOfTurnAction",
+        "DealDamageRadiant",
+        "ReduceDamageDealt"
+      ],
+      "hp": -8,
+      "effects": [
+        {
+          "text": "The maximum HP of this card is {H} * 2.\nReduce damage dealt to ",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        },
+        {
+          "text": "Fractal",
+          "bold": false,
+          "italic": true,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        },
+        {
+          "text": " to 1.\nAt the end of the villain turn, this card deals the {H} - 2 hero targets with the lowest HP 1 irreducible radiant damage each. Until the start of the next villain turn, reduce damage dealt by targets dealt damage this way by 1.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "powers": [],
+      "quote_text": [
+        {
+          "text": "Agent 1337: Roxy Barrett, Becky's BFF.\nPowers started out as tech, but they have started to physically change her.\n- Menagerie Annual #2",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "nemesis": []
+    },
+    {
+      "id": "1acddde6-464d-8195-ba2d-d556bd4f96e3",
+      "name": "Rabid Fans",
+      "palette": "1acddde6-464d-81cf-be12-dbdb29a83d58",
+      "quantity": 3,
+      "keywords": ["Minion"],
+      "icons": ["ReduceDamageTaken"],
+      "hp": null,
+      "effects": [
+        {
+          "text": "Reduce damage dealt to other villain targets by 1.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "powers": [],
+      "quote_text": [
+        {
+          "text": "Bystander: We are here because Becky has\nbeen ",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        },
+        {
+          "text": "wrongly",
+          "bold": true,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        },
+        {
+          "text": " imprisoned and ",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        },
+        {
+          "text": "denied",
+          "bold": true,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        },
+        {
+          "text": " the support she needs for her disabilities.\n- The Menagerie Annual #2",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "nemesis": []
+    },
+    {
+      "id": "1acddde6-464d-81e7-aff2-cba0d1020a11",
+      "name": "Ego Trip",
+      "palette": "1acddde6-464d-81cf-be12-dbdb29a83d58",
+      "quantity": 1,
+      "keywords": ["Nemesis"],
+      "icons": ["CounterDamage", "RedirectDamage", "DealDamageMelee"],
+      "hp": -12,
+      "effects": [
+        {
+          "text": "The maximum HP of this card is {H} * 3.\nThe first time {Unmute} would be dealt damage each turn, redirect it to this card.\nThe first time this card is dealt damage by each other target each turn, it deals the source of that damage 3 melee damage.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "powers": [],
+      "quote_text": [
+        {
+          "text": "Agent 1337: Chuckie Lovhoug. He's got none\nof the usual markers for gene therapy, so the magic crew coming in to look at him.\n- The Menagerie Annual #2",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ],
+      "nemesis": []
+    }
+  ],
+  "relationships": [
+    {
+      "id": "1acddde6-464d-814d-b445-f94f8b88755b",
+      "name": "BartKFSentinels.TheGoalieCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "The soccer park is down the road, little girl. Get lost.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-816e-a5d4-f4b2cf5065ea",
+      "name": "Angille.SpeedrunnerCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Ugh, gamers. You people are the worst part of social media.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8106-b874-d0e5e4c3c4d8",
+      "name": "TsukikoInkblotCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Internet video is going to kill this cartoon star.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8108-931d-ebe85a3330ad",
+      "name": "JpJw.DinoFancie.BonnieCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "dAww, I freaking love dinosaurs.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-813e-aeda-e267b24fbb9f",
+      "name": "GunClubSpeedrunnerCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Ugh, gamers. You people are the worst part of social media.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8153-8b33-dec4f8d9b89a",
+      "name": "TheGoalieOnIceCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Cute hockey pads, little girl.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8156-9876-f56b381ad6e5",
+      "name": "GoldDragonInkblotHumanCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Internet video is going to kill this cartoon star.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8156-aa14-d3271c5c9cdf",
+      "name": "RooksGambitCharlieCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Oh cool, a real alien. My views are going to go through the roof during this fight!",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8165-b8ad-eba0cdaf5623",
+      "name": "SilhouetteInkblotCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Internet video is going to kill this cartoon star.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8175-a246-c2815048a84d",
+      "name": "SpookyGhostwriter.GoldDragonHumanCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Oh look, it's the big gold buffoon. Don't you have a book signing or something to be at?",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8177-9607-c8100a735622",
+      "name": "CaseFiles.CharlieCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Oh cool, a real alien. My views are going to go through the roof during this fight!",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-81e3-9f1a-e2d5e2dd92c2",
+      "name": "MoondancerCharlieCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Oh cool, a real alien. My views are going to go through the roof during this fight!",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8101-bdf1-e4904075fb3d",
+      "name": "default",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "What do we have here? A new batch of so-called heroes ready to be exposed as frauds?",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8119-8260-ecd9b893f11c",
+      "name": "ChristmasBonnieCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "dAww, I freaking love dinosaurs.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-8176-a91c-ce62aeca75e3",
+      "name": "Menagerie.MercuryCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Well if it isn't Halcyon's Silver Son, here to show off for the media again.",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    },
+    {
+      "id": "1acddde6-464d-81a4-8091-e16c33785b21",
+      "name": "SpookyGhostwriter.SilhouetteCharacter",
+      "spoken_by": ["1acddde6-464d-813e-967d-f173d99a4086"],
+      "opening_line": [
+        {
+          "text": "Round two, vampire queen!",
+          "bold": false,
+          "italic": false,
+          "strikethrough": false,
+          "underline": false,
+          "code": false,
+          "color": "default"
+        }
+      ]
+    }
+  ]
+}

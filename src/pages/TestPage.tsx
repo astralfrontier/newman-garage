@@ -7,6 +7,7 @@ import * as mercury from "../../samples/mercury.json";
 import * as netherwarden from "../../samples/netherwarden.json";
 import * as spaceBug from "../../samples/Space_Bug.json";
 import * as unmute from "../../samples/unmute.json";
+import * as unmuteMulti from "../../samples/unmute-multi.json";
 import SentinelsData from "../components/SentinelsData";
 import DefaultLayout from "../layouts/Default";
 
@@ -34,6 +35,9 @@ export default function TestPage(_props: TestPageProps) {
       break;
     case "unmute":
       deckData = unmute;
+      break;
+    case "unmute-multi":
+      deckData = unmuteMulti;
       break;
   }
 
