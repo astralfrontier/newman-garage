@@ -23,6 +23,19 @@ export function setupOrderNumber(card: Setup): number {
   return parseInt(orderNumber) || 1;
 }
 
+export function findCharacterSetupCards(setup: Setup[]): Setup[] {
+  const primaryCards = reject(
+    (card: Setup) =>
+      card.tags.includes("Hero Variant") || card.tags.includes("B"),
+    setup
+  );
+  const candidates = primaryCards.length > 0 ? primaryCards : setup;
+  const sortedCandidates = candidates.toSorted(
+    (a, b) => setupOrderNumber(a) - setupOrderNumber(b)
+  );
+  return sortedCandidates || setup;
+}
+
 /**
  * Since Setup can have multiple entries, e.g. Villain A and Villain B,
  * find the card that represents the main character or environment

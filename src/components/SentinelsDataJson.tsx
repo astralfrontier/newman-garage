@@ -32,6 +32,7 @@ import {
   Setup,
 } from "../../netlify/functions/notion-retrieve";
 import {
+  findCharacterSetupCards,
   findPrimarySetupCard,
   identifier,
   idToNemesis,
@@ -312,7 +313,9 @@ function cardsToJson(
 function deckDataToJson(deckData: DeckData): any {
   const primarySetupCard = findPrimarySetupCard(deckData.setup);
   const defaultPalette = primarySetupCard.palette;
-  const cardName = identifier(`${primarySetupCard.name} Character`);
+  const identifierCards = findCharacterSetupCards(deckData.setup).map((card) =>
+    identifier(`${card.name} Character`)
+  );
 
   const kind = find(
     (tag) => tag == "Hero" || tag == "Villain" || tag == "Environment",
@@ -331,7 +334,7 @@ function deckDataToJson(deckData: DeckData): any {
           shortName: identifier(`${primarySetupCard.name}`),
         }
       : {
-          initialCardIdentifiers: [cardName],
+          initialCardIdentifiers: identifierCards,
           promoCards: flatten(
             map(
               (card: Setup) => heroCardToJson(deckData, card, primarySetupCard),
