@@ -154,7 +154,7 @@ function plaintext(data: any): string {
  * @returns
  */
 function tag(data: any): string {
-  return data.name;
+  return data?.name;
 }
 
 /**
