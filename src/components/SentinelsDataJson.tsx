@@ -1,9 +1,11 @@
 import {
   assoc,
+  concat,
   difference,
   filter,
   find,
   flatten,
+  groupBy,
   includes,
   isEmpty,
   isNil,
@@ -34,6 +36,7 @@ import {
   identifier,
   idToNemesis,
   idToPalette,
+  setupOrderNumber,
 } from "../utility";
 import CopyableText from "./CopyableText";
 import { SentinelsDataDisplayProps } from "./SentinelsData";
@@ -132,52 +135,71 @@ function heroCardToJson(
   }
 }
 
-function villainCardToJson(deckData: DeckData) {
-  const A = find((card) => card.tags.includes("A"), deckData.setup);
-  const B = find((card) => card.tags.includes("B"), deckData.setup);
+function villainCardPairToJson(deckData: DeckData, A: Setup, B: Setup) {
+  const openingLines = deckOpeningLines(deckData, A);
+  const nemesisIdentifiers = idToNemesis(deckData, A.nemesis);
+  const flippedNemesisIdentifiers = idToNemesis(
+    deckData,
+    B.nemesis,
+    "flippedNemesisIdentifiers"
+  );
 
-  if (A && B) {
-    const openingLines = deckOpeningLines(deckData, A);
-    const nemesisIdentifiers = idToNemesis(deckData, A.nemesis);
-    const flippedNemesisIdentifiers = idToNemesis(
-      deckData,
-      B.nemesis,
-      "flippedNemesisIdentifiers"
-    );
+  const A_palette = idToPalette(deckData, A.palette);
 
-    const A_palette = idToPalette(deckData, A.palette);
+  return [
+    {
+      identifier: identifier(`${A.name} Character`),
+      count: 1,
+      title: A.name,
+      keywords: ["villain", ...difference(["Villain", "A"], A.tags)],
+      body: A.villain_title,
+      backgroundColor: A_palette?.box_color || "ffffff",
+      foilBackgroundColor: A_palette?.box_color || "ffffff",
+      character: true,
+      hitpoints: A.hp,
+      ...nemesisIdentifiers,
+      setup: richtext(A.villain_setup),
+      gameplay: richtext(A.villain_effects),
+      advanced: richtextOneline(A.advanced),
+      icons: A.icons,
+      flippedHitpoints: B.hp,
+      flippedBody: B.villain_title,
+      flippedGameplay: richtext(B.villain_effects),
+      flippedAdvanced: richtextOneline(B.advanced),
+      flippedIcons: B.icons,
+      ...flippedNemesisIdentifiers,
+      difficulty: A.rating,
+      challengeTitle: richtextOneline(A.challenge_name),
+      challengeText: richtextOneline(A.challenge),
+      openingLines,
+    },
+  ];
+}
 
-    return [
-      {
-        identifier: identifier(`${A.name} Character`),
-        count: 1,
-        title: A.name,
-        keywords: ["villain", ...difference(["Villain", "A"], A.tags)],
-        body: A.villain_title,
-        backgroundColor: A_palette?.box_color || "ffffff",
-        foilBackgroundColor: A_palette?.box_color || "ffffff",
-        character: true,
-        hitpoints: A.hp,
-        ...nemesisIdentifiers,
-        setup: richtext(A.villain_setup),
-        gameplay: richtext(A.villain_effects),
-        advanced: richtextOneline(A.advanced),
-        icons: A.icons,
-        flippedHitpoints: B.hp,
-        flippedBody: B.villain_title,
-        flippedGameplay: richtext(B.villain_effects),
-        flippedAdvanced: richtextOneline(B.advanced),
-        flippedIcons: B.icons,
-        ...flippedNemesisIdentifiers,
-        difficulty: A.rating,
-        challengeTitle: richtextOneline(A.challenge_name),
-        challengeText: richtextOneline(A.challenge),
-        openingLines,
-      },
-    ];
-  } else {
-    return [];
+function villainCardsToJson(deckData: DeckData) {
+  // Group keys have to be strings apparently
+  const cardsGroupedInOrder = groupBy(
+    (card: Setup) => `${setupOrderNumber(card)}`,
+    deckData.setup
+  );
+  // ... but we only sort numerically
+  const sortedKeys = Object.keys(cardsGroupedInOrder)
+    .map((key) => parseInt(key))
+    .sort((a, b) => a - b);
+
+  let setupCards: unknown[] = [];
+
+  for (let key of sortedKeys) {
+    const cardsInThisSequence = cardsGroupedInOrder[`${key}`] || [];
+    const A = find((card) => card.tags.includes("A"), cardsInThisSequence);
+    const B = find((card) => card.tags.includes("B"), cardsInThisSequence);
+
+    if (A && B) {
+      setupCards = concat(setupCards, villainCardPairToJson(deckData, A, B));
+    }
   }
+
+  return setupCards;
 }
 
 function flavor(quote_text: RichText, isEnvironmentDeck: boolean) {
@@ -328,7 +350,7 @@ function deckDataToJson(deckData: DeckData): any {
     ...preamble,
     cards: [
       ...heroCardToJson(deckData, primarySetupCard),
-      ...villainCardToJson(deckData),
+      ...villainCardsToJson(deckData),
       ...sortBy(prop("identifier"), cards),
     ],
   };

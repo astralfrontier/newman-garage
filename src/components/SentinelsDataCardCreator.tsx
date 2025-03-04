@@ -2,6 +2,7 @@ import {
   difference,
   find,
   flatten,
+  groupBy,
   head,
   intersection,
   isEmpty,
@@ -25,7 +26,12 @@ import {
   RichText,
   Setup,
 } from "../../netlify/functions/notion-retrieve";
-import { findPrimarySetupCard, identifier, idToPalette } from "../utility";
+import {
+  findPrimarySetupCard,
+  identifier,
+  idToPalette,
+  setupOrderNumber,
+} from "../utility";
 import CopyableText from "./CopyableText";
 import { SentinelsDataDisplayProps } from "./SentinelsData";
 
@@ -200,6 +206,11 @@ function villainCard(
   const palette = idToPalette(deckData, card.palette) || defaultPalette;
   const AorB = head(intersection(["A", "B"], card.tags));
 
+  const keywords = reject(
+    (tag) => tag == "A" || tag == "B" || parseInt(tag) > 0,
+    card.tags
+  );
+
   return `##villain
 [[name]] ${card.name}
 [[art]] images\\${identifier(card.name)}${AorB}.png
@@ -208,7 +219,7 @@ function villainCard(
 [[boxcolor]] ${palette?.box_color || "ffffff"}
 [[topcolor]] ${palette?.top_color || "ffffff"}
 [[btmcolor]] ${palette?.bottom_color || "ffffff"}
-[[keywords]] ${join(", ", difference(card.tags, ["A", "B"]))}
+[[keywords]] ${join(", ", keywords)}
 [[hp]] ${card.hp}
 [[nemesis]] blank.png
 [[title]] ${card.villain_title}

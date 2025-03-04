@@ -18,6 +18,11 @@ export function identifier(input: string): string {
   return pascalcase(input.replace(/['"-]+/g, ""));
 }
 
+export function setupOrderNumber(card: Setup): number {
+  const orderNumber = card.tags.find((tag) => parseInt(tag)) || "1";
+  return parseInt(orderNumber) || 1;
+}
+
 /**
  * Since Setup can have multiple entries, e.g. Villain A and Villain B,
  * find the card that represents the main character or environment
@@ -27,10 +32,16 @@ export function identifier(input: string): string {
 export function findPrimarySetupCard(setup: Setup[]): Setup {
   const primaryCards = reject(
     (card: Setup) =>
-      card.tags.includes("Hero Variant") || card.tags.includes("B"),
+      card.tags.includes("Hero Variant") ||
+      card.tags.includes("B") ||
+      setupOrderNumber(card) > 1,
     setup
   );
-  return head(primaryCards) || setup[0];
+  const candidates = primaryCards.length > 0 ? primaryCards : setup;
+  const sortedCandidates = candidates.toSorted(
+    (a, b) => setupOrderNumber(a) - setupOrderNumber(b)
+  );
+  return head(sortedCandidates) || setup[0];
 }
 
 export function idToPalette(
